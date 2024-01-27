@@ -8,6 +8,7 @@ import getHandleController from './getHandle.controller';
 import { SCHEMA_TYPE } from '@library/constant';
 import linksModule from './links/links.module';
 import getSitemapXmlController from './getSitemapXml.controller';
+import getOgImagePngController from './getOgImagePng.controller';
 
 export default new Module([{
 	method: 'GET',
@@ -17,6 +18,10 @@ export default new Module([{
 	method: 'GET',
 	path: 'favicon.ico',
 	handlers: [getFaviconIcoController]
+}, {
+	method: 'GET',
+	path: 'ogImage.png',
+	handlers: [getOgImagePngController]
 }, {
 	method: 'GET',
 	path: 'robots.txt',

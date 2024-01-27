@@ -65,6 +65,8 @@ export const INDEX_HTML: string = readFileSync(join(__dirname, 'index.html')).to
 
 export const HANDLE_HTML: string = readFileSync(join(__dirname, 'handle.html')).toString();
 
-export const FAVICON: Buffer = readFileSync(join(__dirname, 'favicon.ico'));
+export const FAVICON_ICO: Buffer = readFileSync(join(__dirname, 'favicon.ico'));
+
+export const OG_IMAGE_PNG: Buffer = readFileSync(join(__dirname, 'ogImage.png'));
 
 export const SITEMAP_XML: string = readFileSync(join(__dirname, 'sitemap.xml')).toString();
