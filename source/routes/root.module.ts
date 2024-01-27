@@ -7,6 +7,7 @@ import wellKnownModule from './.well-known/wellKnown.module';
 import getHandleController from './getHandle.controller';
 import { SCHEMA_TYPE } from '@library/constant';
 import linksModule from './links/links.module';
+import getSitemapXmlController from './getSitemapXml.controller';
 
 export default new Module([{
 	method: 'GET',
@@ -20,6 +21,10 @@ export default new Module([{
 	method: 'GET',
 	path: 'robots.txt',
 	handlers: [getRobotsTxtController]
+}, {
+	method: 'GET',
+	path: 'sitemap.xml',
+	handlers: [getSitemapXmlController]
 }, {
 	method: 'POST',
 	path: 'coffee',

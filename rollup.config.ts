@@ -20,7 +20,7 @@ export default {
 		generateBundle: function (): void {
 			const libraryPath: string = join(__dirname, 'source/library/');
 
-			for(const fileName of ['index.html', 'handle.html', 'favicon.ico']) {
+			for(const fileName of ['index.html', 'handle.html', 'favicon.ico', 'sitemap.xml']) {
 				this.emitFile({
 					type: 'asset',
 					fileName: fileName,
