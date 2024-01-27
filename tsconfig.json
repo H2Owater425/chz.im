@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"module": "CommonJS",
+		"target": "ES2022",
+		"outDir": "distribution",
+		"strict": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"removeComments": true,
+		"baseUrl": ".",
+		"paths": {
+			"@library/*": ["source/library/*"],
+			"@schemas/*": ["source/schemas/*"],
+			"@handlers/*": ["source/handlers/*"]
+		},
+		"typeRoots": ["source/types", "node_modules/@types"]
+	},
+	"exclude": ["node_modules", "distribution/**/*"],
+	"include": ["rollup.config.ts", "source/**/*"]
+}

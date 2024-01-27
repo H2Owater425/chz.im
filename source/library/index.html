@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>CHZ.IM</title>
+		<style>
+			@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-jp.min.css");
+			
+			* {
+				margin: 0;
+				padding: 0;
+				font-family: "Pretendard JP Variable", "Pretendard JP", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Hiragino Sans", "Apple SD Gothic Neo", Meiryo, "Noto Sans JP", "Noto Sans KR", "Malgun Gothic", Osaka, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+			}
+
+			:not(input) {
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			main {
+				justify-content: center;
+				gap: 48px;
+				height: 100vh;
+			}
+
+			main,main>div {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			input {
+				height: 32px;
+				border: 0;
+				outline: 0;
+				font-size: 1.1rem;
+				max-width: 490px;
+				width: 100%;
+			}
+
+			input[type=password],input[type=text] {
+				border-bottom: 1px solid #585858;
+				background-color: transparent;
+			}
+
+			input[type=submit] {
+				border-radius: 999999px;
+				margin-top: 16px;
+				cursor: pointer;
+			}
+
+			input.create {
+				background-color: #daebd5;
+			}
+
+			input.create:hover {
+				background-color: #cae9c0;
+			}
+
+			input.create:active {
+				background-color: #afe99c;
+			}
+
+			input.delete {
+				background-color: #ebdbd5;
+			}
+
+			input.delete:hover {
+				background-color: #e6cccc;
+			}
+
+			input.delete:active {
+				background-color: #e4a4a4;
+			}
+
+			input[type=checkbox] {
+				appearance: none;
+				position: relative;
+				border: 1px solid #585858;
+				background-color: #6bff8b;
+				border-radius: 999999px;
+				width: 40px;
+				height: 20px;
+				top: 2px;
+			}
+
+			input[type=checkbox]::before {
+				content: "";
+				position: absolute;
+				top: 1px;
+				left: 1px;
+				width: 16px;
+				height: 16px;
+				border-radius: 50%;
+				background-color: #585858;
+			}
+
+			input[type=checkbox]:checked {
+				background-color: #ff816b;
+			}
+
+			input[type=checkbox]:checked::before {
+				left: 21px;
+			}
+
+			h1 {
+				font-size: 4rem;
+			}
+
+			div>a,div>p {
+				font-size: 1.3rem;
+			}
+
+			footer,form {
+				flex-direction: column;
+			}
+
+			form {
+				gap: 16px;
+				width: 95%;
+			}
+
+			footer {
+				justify-content: center;
+				background-color: #e1e2e6;
+				gap: 8px;
+				height: 80px;
+			}
+
+			p>svg {
+				height: 1rem;
+			}
+
+			div>svg {
+				height: 1.4rem;
+			}
+
+			form>div {
+				display: flex;
+				justify-content: space-between;
+				width: 100px;
+			}
+
+			footer,footer>p,form {
+				display: flex;
+				align-items: center;
+			}
+
+			footer>p:first-child {
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+
+			a,a:visited {
+				color: #006ba6;
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<div>
+				<h1>CHZ.IM</h1>
+				<p>치지직 링크 단축기</p>
+				<br />
+				<a id="result"></a>
+			</div>
+			
+			<form id="form">
+				<div>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#3B88C3" d="M36 32c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4V4c0-2.209 1.791-4 4-4h28c2.209 0 4 1.791 4 4v28z"/><path d="M1.527 13.121c0-.85.544-1.326 1.275-1.326.323 0 .85.255 1.071.561l5.388 7.191h.034v-6.426c0-.85.544-1.326 1.275-1.326.731 0 1.275.476 1.275 1.326v9.655c0 .85-.544 1.325-1.275 1.325-.323 0-.833-.255-1.071-.561L4.11 16.434h-.033v6.341c0 .85-.544 1.325-1.275 1.325-.731 0-1.275-.476-1.275-1.325v-9.654zm11.067.255c0-.85.425-1.479 1.326-1.479h4.215c.816 0 1.207.578 1.207 1.173 0 .578-.407 1.173-1.207 1.173h-2.992v2.481h2.788c.833 0 1.24.578 1.24 1.173 0 .578-.424 1.173-1.24 1.173h-2.788v2.584h3.145c.816 0 1.206.578 1.206 1.173 0 .578-.407 1.173-1.206 1.173h-4.386c-.748 0-1.309-.51-1.309-1.274v-9.35zm7.31.119c-.051-.221-.068-.34-.068-.578 0-.544.459-1.122 1.207-1.122.816 0 1.207.476 1.359 1.224l1.445 7.224h.034l2.21-7.445c.188-.612.697-1.003 1.326-1.003.629 0 1.139.391 1.326 1.003l2.209 7.445h.033l1.445-7.224c.152-.748.545-1.224 1.359-1.224.748 0 1.207.578 1.207 1.122 0 .238-.016.357-.068.578l-2.158 9.281c-.17.714-.73 1.325-1.682 1.325-.834 0-1.48-.544-1.684-1.24l-1.97-6.561H27.4l-1.972 6.561c-.204.696-.851 1.24-1.683 1.24-.952 0-1.514-.611-1.684-1.325l-2.157-9.281z" fill="#FFF"/></svg>
+					<input type="checkbox" id="toggle" />
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#9AAAB4" d="M31.5 4l-1.784 4.542L27.932 4h-4.147l-1.926 4.903L19.932 4h-3.863l-1.926 4.903L12.216 4H8.068L6.284 8.542 4.5 4H2.133l3.735 28.013h24.263L33.867 4H31.5zm-5.642 1.678l2.459 6.425-2.601 6.621-2.457-6.254 2.599-6.792zM18 6.049l2.457 6.42L18 18.723l-2.457-6.254L18 6.049zm-7.858-.371l2.599 6.792-2.457 6.254-2.601-6.621 2.459-6.425zM5.958 16.611l.326-.853 2.549 6.66-1.573 4.004-1.302-9.811zM8.068 32l2.216-5.79L12.5 32H8.068zm3.668-9.582l2.407-6.288 2.406 6.288-2.406 6.126-2.407-6.126zM15.784 32L18 26.21 20.216 32h-4.432zm3.667-9.582l2.406-6.288 2.406 6.288-2.406 6.126-2.406-6.126zM23.5 32l2.216-5.79L27.932 32H23.5zm5.392-5.192l-1.725-4.39 2.549-6.659.411 1.074-1.235 9.975z"/><path fill="#67757F" d="M32 34c0-1.104-.896-2-2-2H6c-1.104 0-2 .896-2 2s.896 2 2 2h24c1.104 0 2-.896 2-2zm4-32c0-1.105-.896-2-2-2H2C.896 0 0 .896 0 2c0 1.105.896 2 2 2h32c1.104 0 2-.895 2-2z"/></svg>
+				</div>
+				<input type="text" style="color: #ff0000" placeholder="핸들" id="handle">
+				<input type="text" style="color: #ff0000" placeholder="채널 주소 (https://chzzk.naver.com/~)" id="channelUrl">
+				<input type="password" style="color: #ff0000" placeholder="비밀번호" id="password">
+
+				<input type="submit" class="create" value="생성" id="submit">
+			</form>
+		</main>
+
+		<footer>
+			<p><span><a href="https://chzzk.naver.com/">치지직</a>은&nbsp;<a href="https://navercorp.com/">네이버 주식회사</a>의 상표이며,&nbsp;</span><span>해당 사이트와 직접적 관련이 없습니다</span></p>
+			<p>Made with&nbsp;<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" class="_icon_1lffh_21"><path fill="#DD2E44" d="M35.885 11.833c0-5.45-4.418-9.868-9.867-9.868-3.308 0-6.227 1.633-8.018 4.129-1.791-2.496-4.71-4.129-8.017-4.129-5.45 0-9.868 4.417-9.868 9.868 0 .772.098 1.52.266 2.241C1.751 22.587 11.216 31.568 18 34.034c6.783-2.466 16.249-11.447 17.617-19.959.17-.721.268-1.469.268-2.242"></path></svg>&nbsp;by&nbsp;<a href="https://github.com/H2Owater425">H2Owater425</a></p>
+		</footer>
+
+		<script>
+			const result = document.getElementById('result'),
+			form = document.getElementById('form'),
+			toggle = document.getElementById('toggle'),
+			handle = document.getElementById('handle'),
+			channelUrl = document.getElementById('channelUrl'),
+			password = document.getElementById('password'),
+			submit = document.getElementById('submit');
+
+			function isHandleValid() {
+				return /^[^\+/]{1,32}$/.test(handle['value']);
+			}
+
+			function isChannelUrlValid() {
+				return /^https:\/\/chzzk\.naver\.com\/.{1,32}$/.test(channelUrl['value']);
+			}
+			
+			function isPasswordValid() {
+				return /^.+$/.test(password['value']);
+			}
+
+			if(form !== null && toggle !== null && handle !== null && channelUrl !== null && password !== null && submit !== null) {
+				result.addEventListener('click', function (event) {
+					event.preventDefault();
+
+					navigator['clipboard'].writeText(result['innerText']);
+
+					alert('복사됨');
+
+					return;
+				});
+
+				handle.addEventListener('input', function () {
+					handle['style']['color'] = isHandleValid() ? '#008000' : '#ff0000';
+
+					return;
+				});
+
+				channelUrl.addEventListener('input', function () {
+					channelUrl['style']['color'] = isChannelUrlValid() ? '#008000' : '#ff0000';
+
+					return;
+				});
+
+				password.addEventListener('input', function () {
+					password['style']['color'] = isPasswordValid() ? '#008000' : '#ff0000';
+
+					return;
+				});
+
+				form.addEventListener('submit', function (event) {
+					event.preventDefault();
+
+					if(toggle['checked']) {
+						// 삭제
+						if(isHandleValid()) {
+							if(isPasswordValid()) {
+								result['innerText'] = '';
+
+								fetch('/links/' + handle['value'], {
+									method: 'DELETE',
+									body: JSON.stringify({
+										password: password['value']
+									}),
+									headers: {
+										'Content-Type': 'application/json'
+									}
+								})
+								.then(function (response) {
+									if(response['status'] === 204) {
+										alert('삭제 성공');
+										
+										return;
+									} else {
+										return response.json();
+									}
+								})
+								.then(function (responseJson) {
+									if(typeof(responseJson) !== 'undefined') {
+										switch(responseJson['status']) {
+											case 'fail': {
+												switch(responseJson['data']['title'].slice(0, responseJson['data']['title'].indexOf(' '))) {
+													case 'Body[\'password\']': {
+														alert('올바른 비밀번호를 입력하세요');
+														
+														return;
+													}
+
+													case 'Parameter[\'handle\']': {
+														alert('올바른 핸들을 입력하세요');
+
+														return;
+													}
+												}
+											}
+
+											case 'error': {
+												alert('오류');
+
+												throw responseJson;
+											}
+										}
+									}
+								})
+								.catch(console.error);
+							} else {
+								alert('올바른 비밀번호를 입력하세요');
+							}
+						} else {
+							alert('올바른 핸들을 입력하세요');
+						}
+					} else {
+						// 생성
+
+						if(isHandleValid()) {
+							if(isChannelUrlValid()) {
+								if(isPasswordValid()) {
+									result['innerText'] = '';
+									
+									fetch('/links', {
+										method: 'POST',
+										body: JSON.stringify({
+											handle: handle['value'],
+											target: channelUrl['value'].slice(24),
+											password: password['value']
+										}),
+										headers: {
+											'Content-Type': 'application/json'
+										}
+									})
+									.then(function (response) {
+										return response.json();
+									})
+									.then(function (responseJson) {
+										switch(responseJson['status']) {
+											case 'success': {
+												result['innerText'] = 'https://chz.im/' + responseJson['data']['handle'];
+
+												return;
+											}
+
+											case 'fail': {
+												switch(responseJson['data']['title'].slice(0, responseJson['data']['title'].indexOf(' '))) {
+													case 'Body[\'handle\']': {
+														alert('고유한 핸들을 입력하세요');
+
+														return;
+													}
+
+													case 'Body[\'target\']': {
+														alert('올바른 채널 주소를 입력하세요');
+
+														return;
+													}
+												}
+											}
+
+											case 'error': {
+												alert('오류');
+
+												throw responseJson;
+											}
+										}
+									})
+									.catch(console.error);
+								} else {
+									alert('올바른 비밀번호를 입력하세요');
+								}
+							} else {
+								alert('올바른 채널 주소를 입력하세요');
+							}
+						} else {
+							alert('올바른 핸들을 입력하세요');
+						}
+					}
+				});
+
+				toggle.addEventListener('click', function () {
+					channelUrl['hidden'] = toggle['checked'];
+					submit['className'] = toggle['checked'] ? 'delete' : 'create';
+					submit['value'] = toggle['checked'] ? '삭제' : '생성';
+
+					return;
+				});
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+{
+	"name": "chz.im",
+	"version": "0.0.1",
+	"description": "chz.im",
+	"main": "distribution/application.js",
+	"scripts": {
+		"build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --bundleConfigAsCjs",
+		"start": "node distribution/application.js",
+		"dev": "ts-node-dev --rs --require tsconfig-paths/register --files source/application.ts"
+	},
+	"author": "H2Owater425 <h2o@h2owr.xyz>",
+	"license": "MIT",
+	"devDependencies": {
+		"@rollup/plugin-terser": "^0.4.4",
+		"@rollup/plugin-typescript": "^11.1.6",
+		"@types/node": "^17.0.45",
+		"@types/pg": "^8.11.0",
+		"rollup": "^4.9.6",
+		"ts-node-dev": "^2.0.0",
+		"tsconfig-paths": "^4.2.0",
+		"tslib": "^2.6.2",
+		"typescript": "^5.3.3"
+	},
+	"dependencies": {
+		"dotenv": "^16.4.1",
+		"ioredis": "^5.3.2",
+		"kysely": "^0.26.3",
+		"pg": "^8.11.3"
+	}
+}
