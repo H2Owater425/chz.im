@@ -56,7 +56,7 @@ export default class Server extends _Server {
 				data = String(data);
 			}
 			
-			if(typeof(data) !== 'undefined') {
+			if(typeof(data) !== 'undefined' && this['request']['method'] !== 'HEAD') {
 				const contentType: string | undefined = this.getHeader('Content-Type') as string;
 
 				this.setHeader('Content-Type', (typeof(contentType) !== 'string' ? (isFormatted ? 'application/json' : 'text/plain') : contentType) + ';charset=utf-8');
@@ -408,14 +408,19 @@ export default class Server extends _Server {
 					server: this
 				});
 
+				let isHead: boolean = false;
+
 				switch(request['method']) {
+					case 'HEAD': {
+						isHead = true;
+					}
 					case 'POST':
 					case 'PATCH':
 					case 'DELETE':
 					case 'OPTIONS':
 					case 'GET': {
 						const url: UrlWithParsedQuery = parse(request['url'], true);
-						const routerResult: [Route, Record<string, unknown>] | null = this['router'].find(request['method'], url['pathname'] as string);
+						const routerResult: [Route, Record<string, unknown>] | null = this['router'].find(!isHead ? request['method'] as Method : 'GET', url['pathname'] as string);
 
 						if(routerResult !== null) {
 							Object.assign(request, {
