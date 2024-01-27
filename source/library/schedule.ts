@@ -4,7 +4,7 @@ import { resolveInSequence } from '@library/utility';
 import { Database } from '@library/type';
 import Logger from '@library/logger';
 
-global.setInterval(function (): void {
+globalThis.setInterval(function (): void {
 	const startTime: number = Date.now();
 	const keys: string[] = [];
 	const ids: number[] = [];
