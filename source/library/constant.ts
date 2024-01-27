@@ -61,8 +61,8 @@ export const enum SCHEMA_TYPE {
 
 export const CHZZK_BASE_URL = 'https://chzzk.naver.com/' as const;
 
-export const INDEX_HTML: string = readFileSync(join(globalThis['__dirname'], 'index.html')).toString();
+export const INDEX_HTML: string = readFileSync(join(__dirname, 'index.html')).toString();
 
-export const HANDLE_HTML: string = readFileSync(join(globalThis['__dirname'], 'handle.html')).toString();
+export const HANDLE_HTML: string = readFileSync(join(__dirname, 'handle.html')).toString();
 
-export const FAVICON: Buffer = readFileSync(join(globalThis['__dirname'], 'favicon.ico'));
+export const FAVICON: Buffer = readFileSync(join(__dirname, 'favicon.ico'));
