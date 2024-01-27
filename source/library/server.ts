@@ -388,11 +388,18 @@ export default class Server extends _Server {
 			try {
 				Object.assign(request, {
 					startTime: Date.now(),
-					ip: this['isProxied'] && typeof(request['headers']['x-forward-for']) === 'string' ? request['headers']['x-forward-for'] : request['socket']['remoteAddress'],
 					server: this,
 					header: request['headers']
 				});
-		
+
+				if(this['isProxied'] && typeof(request['headers']['x-forwarded-for']) === 'string') {
+					const commaIndex: number = request['headers']['x-forwarded-for'].indexOf(',');
+
+					request['ip'] = request['headers']['x-forwarded-for'].slice(0, commaIndex !== -1 ? commaIndex : undefined);
+				} else {
+					request['ip'] = request['socket']['remoteAddress'] as string;
+				}
+
 				Object.assign(response, {
 					request: request,
 					setStatus: Server.setStatus,
