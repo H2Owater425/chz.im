@@ -260,6 +260,9 @@
 								})
 								.then(function (response) {
 									if(response['status'] === 204) {
+										handle['value'] = '';
+										password['value'] = '';
+
 										alert('삭제 성공');
 										
 										return;
@@ -326,6 +329,9 @@
 									.then(function (responseJson) {
 										switch(responseJson['status']) {
 											case 'success': {
+												handle['value'] = '';
+												channelUrl['value'] = '';
+												password['value'] = '';
 												result['innerText'] = 'https://chz.im/' + responseJson['data']['handle'];
 
 												return;
