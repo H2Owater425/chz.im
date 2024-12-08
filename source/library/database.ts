@@ -8,8 +8,7 @@ import { Pool } from 'pg';
 export const kysely: Kysely<Database> = new Kysely<Database>({
 	dialect: new PostgresDialect({
 		pool: new Pool({
-			connectionString: process['env']['DATABASE_URL'],
-			options: "-c search_path=chz_im"
+			connectionString: process['env']['DATABASE_URL']
 		})
 	})
 });
